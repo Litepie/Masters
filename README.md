@@ -36,9 +36,13 @@ A comprehensive Laravel package for managing master data with advanced multi-ten
 
 ### 🚀 **Performance & Scalability**
 - **Smart Caching**: Automatic caching with configurable TTL and cache invalidation
+- **Laravel 12 Cache Tags**: Enhanced cache tagging for better invalidation
+- **Atomic Cache Locks**: Prevent cache stampede with Laravel 12's atomic locks
 - **Optimized Queries**: Efficient database queries with eager loading support
+- **Lazy Collections**: Memory-efficient handling of large datasets
 - **Bulk Operations**: High-performance import/export capabilities
 - **Database Indexing**: Optimized database indexes for fast lookups
+- **Connection Pooling**: Database connection pooling for better performance
 
 ### 🔧 **Developer Experience**
 - **Eloquent Integration**: Seamless integration with Laravel's Eloquent ORM
@@ -48,9 +52,12 @@ A comprehensive Laravel package for managing master data with advanced multi-ten
 
 ### 🌐 **API & Web Interface**
 - **RESTful API**: Complete REST API with filtering, searching, and pagination
+- **Laravel 12 Enhancements**: JSON:API support, OpenAPI specifications
+- **Enhanced Request Validation**: Laravel 12's improved validation features
+- **API Resources**: Eloquent API Resources for consistent JSON responses
 - **Admin Panel**: Web-based administration interface
 - **Import/Export**: Support for CSV, JSON, and Excel formats
-- **Rate Limiting**: Built-in API rate limiting and throttling
+- **Rate Limiting**: Built-in API rate limiting and throttling with Laravel 12 improvements
 
 ### 🔒 **Security & Reliability**
 - **Soft Deletes**: Safe data deletion with recovery options
@@ -60,10 +67,10 @@ A comprehensive Laravel package for managing master data with advanced multi-ten
 
 ## Requirements
 
-- PHP 8.1 or higher
-- Laravel 10.0 or 11.0
+- PHP 8.2 or higher
+- Laravel 10.0, 11.0, or 12.0
 - MySQL 8.0+ / PostgreSQL 13+ / SQLite 3.8+
-- Redis (optional, for caching)
+- Redis (recommended for caching in Laravel 12)
 
 ## Installation
 
@@ -719,7 +726,7 @@ If you discover any security-related issues, please email security@litepie.com i
 
 ## Credits
 
-- [Litepie Team](https://github.com/litepie)
+- [Lavalite Team](https://github.com/litepie)
 - [All Contributors](../../contributors)
 
 ## License

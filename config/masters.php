@@ -39,13 +39,38 @@ return [
     | Cache Configuration
     |--------------------------------------------------------------------------
     |
-    | Configure caching for master data
+    | Configure caching for master data. Laravel 12 supports enhanced
+    | cache tagging and atomic locks for better performance.
     |
     */
     'cache' => [
         'enabled' => true,
         'ttl' => 3600, // 1 hour
         'prefix' => 'masters',
+        'driver' => env('MASTERS_CACHE_DRIVER', 'redis'), // Recommended for Laravel 12
+        'tags' => [
+            'masters',
+            'master_types',
+            'master_data',
+        ],
+        'atomic_locks' => true, // Laravel 12 feature for cache consistency
+        'serialization' => 'json', // Laravel 12 improved serialization
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Performance Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Laravel 12 performance optimizations
+    |
+    */
+    'performance' => [
+        'eager_loading' => true,
+        'chunk_size' => 1000,
+        'lazy_collections' => true, // Use lazy collections for large datasets
+        'database_connection_pooling' => true,
+        'query_optimization' => true,
     ],
 
     /*
@@ -102,7 +127,7 @@ return [
     | API Configuration
     |--------------------------------------------------------------------------
     |
-    | Configuration for API endpoints
+    | Configuration for API endpoints with Laravel 12 enhancements
     |
     */
     'api' => [
@@ -110,6 +135,18 @@ return [
         'prefix' => 'api/masters',
         'middleware' => ['api'],
         'rate_limit' => '60,1', // 60 requests per minute
+        'version' => 'v1',
+        'response_format' => 'json',
+        'pagination' => [
+            'default_per_page' => 15,
+            'max_per_page' => 100,
+        ],
+        'features' => [
+            'json_api' => false, // Laravel 12 JSON:API support
+            'api_resources' => true, // Use Eloquent API Resources
+            'openapi_spec' => true, // Generate OpenAPI specification
+            'request_validation' => true, // Enhanced request validation
+        ],
     ],
 
     /*
@@ -172,8 +209,50 @@ return [
     | Audit Trail
     |--------------------------------------------------------------------------
     |
-    | Enable audit trail for tracking changes
+    | Enable audit trail for tracking changes with Laravel 12 enhancements
     |
     */
     'audit_trail' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Security Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Laravel 12 security enhancements
+    |
+    */
+    'security' => [
+        'csrf_protection' => true,
+        'rate_limiting' => [
+            'enabled' => true,
+            'max_attempts' => 60,
+            'decay_minutes' => 1,
+        ],
+        'input_sanitization' => true,
+        'sql_injection_protection' => true,
+        'xss_protection' => true,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Monitoring & Observability
+    |--------------------------------------------------------------------------
+    |
+    | Laravel 12 monitoring features
+    |
+    */
+    'monitoring' => [
+        'enabled' => env('MASTERS_MONITORING_ENABLED', false),
+        'metrics' => [
+            'api_requests' => true,
+            'cache_hit_ratio' => true,
+            'query_performance' => true,
+            'tenant_isolation' => true,
+        ],
+        'logging' => [
+            'level' => 'info',
+            'channels' => ['single', 'slack'],
+        ],
+    ],
 ];

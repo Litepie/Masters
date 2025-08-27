@@ -1,0 +1,30 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - src/
+
+    # Level 9 is the highest level
+    level: 6
+
+    ignoreErrors:
+        - '#PHPDoc tag @var#'
+        
+    excludePaths:
+        - ./*/*/FileToBeExcluded.php
+
+    checkMissingIterableValueType: false
+
+    reportUnmatchedIgnoredErrors: false
+
+    parallel:
+        jobSize: 10
+        maximumNumberOfProcesses: 32
+        minimumNumberOfJobsPerProcess: 2
+
+    tmpDir: build/phpstan
+
+    # Laravel specific
+    checkModelProperties: true
+    checkOctaneCompatibility: true

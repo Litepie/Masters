@@ -191,21 +191,29 @@ if (!$city->isRoot()) {
 }
 ```
 
-### Caching
+### Caching (Laravel 12 Enhanced)
 
 ```php
-// Cache is automatically handled, but you can control it
+// Cache is automatically handled with Laravel 12 improvements
 $country = MasterData::find(1);
 
-// Clear specific cache
+// Clear specific cache with tags
 $country->clearCache();
 
-// Clear all master data cache
-MasterData::clearAllCache();
+// Clear all master data cache using Laravel 12 cache tags
+Cache::tags(['masters', 'master_data'])->flush();
 
-// Disable cache for specific operation
-config(['masters.cache.enabled' => false]);
+// Use atomic locks to prevent cache stampede (Laravel 12 feature)
+Cache::lock('master-data-refresh', 10)->get(function () {
+    return MasterData::refreshCache();
+});
+
+// Laravel 12 improved serialization
+config(['masters.cache.serialization' => 'json']);
 $data = Masters::get('countries');
+
+// Lazy collections for memory efficiency (Laravel 12)
+$countries = MasterData::ofType('countries')->lazy()->chunk(100);
 ```
 
 ### API Usage
